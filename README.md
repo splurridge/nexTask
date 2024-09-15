@@ -1,50 +1,43 @@
-# Welcome to your Expo app 👋
+# NexTask
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+NexTask is a sleek and intuitive note-taking app built with React Native, designed to streamline your task management and boost productivity.
 
-## Get started
+# Developers
 
-1. Install dependencies
+NexTask is developed by Francis James Lagang & Margaret Grace Docdoc.
 
-   ```bash
-   npm install
-   ```
+## Table of Contents
 
-2. Start the app
+- [Overview](#overview)
+- [Features](#features)
+- [Installation](#installation)
 
-   ```bash
-    npx expo start
-   ```
+## Overview
 
-In the output, you'll find options to open the app in a
+NexTask is a React Native app designed to help users manage their tasks efficiently. It provides a simple and intuitive interface for adding, tracking, and organizing tasks. Users can mark tasks as completed, view their progress, and manage their to-do list effectively. The app is ideal for anyone looking to stay organized and on top of their daily tasks.
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## Features
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+- Add Tasks: Easily add new tasks to your list.
+- Mark as Completed: Toggle tasks as completed or pending with a single tap.
+- View Progress: See an overview of tasks with options to hide or show completed tasks.
 
-## Get a fresh project
-
-When you're ready, run:
+## Installation
 
 ```bash
-npm run reset-project
+# Clone the repository
+git clone https://github.com/splurridge/nexTask.git
+
+# Navigate into the project directory
+cd nexTask
+
+# Install dependencies
+npm install
+
+# Install Expo CLI globally
+npm install -g expo-cli
+
+# Use this command to scan through Expo Go app
+npx expo start
 ```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+# nexTask

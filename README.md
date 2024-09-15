@@ -1,6 +1,6 @@
 # NexTask
 
-NexTask is a sleek and intuitive note-taking app built with React Native, designed to streamline your task management and boost productivity.
+NexTask is a sleek and intuitive To-Do List app built with React Native, designed to streamline your task management and boost productivity.
 
 # Developers
 
@@ -40,4 +40,5 @@ npm install -g expo-cli
 # Use this command to scan through Expo Go app
 npx expo start
 ```
+
 # nexTask

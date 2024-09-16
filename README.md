@@ -6,6 +6,15 @@ NexTask is a sleek and intuitive To-Do List app built with React Native, designe
 
 NexTask is developed by Francis James Lagang & Margaret Grace Docdoc.
 
+# App Demo
+
+![Screenshot 1](./assets/images/Screenshots/1.png)
+![Screenshot 2](./assets/images/Screenshots/2.png)
+
+# Video
+
+[![Watch our video](./assets/images/nextask-logo.jpg)](https://youtu.be/5gLMu8WjCio)
+
 ## Table of Contents
 
 - [Overview](#overview)

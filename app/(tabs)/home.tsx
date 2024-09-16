@@ -46,8 +46,9 @@ const Home: React.FC = () => {
   const [currentTask, setCurrentTask] = useState("");
   const [selectedTodoId, setSelectedTodoId] = useState<number | null>(null);
   const [focusedField, setFocusedField] = useState<string | null>(null);
-  const [isMassChecked, setIsMassChecked] = useState<{ [key: number]: boolean }>({});
-
+  const [isMassChecked, setIsMassChecked] = useState<{
+    [key: number]: boolean;
+  }>({});
 
   // function to add a new Todo
   // Todo includes title and tasks
@@ -148,12 +149,34 @@ const Home: React.FC = () => {
     }
   };
 
+  const handleMassCheck = (todoId: number) => {
+    const isChecked = isMassChecked[todoId] || false;
+
+    setTodos((prevTodos) =>
+      prevTodos.map((todo) =>
+        todo.id === todoId
+          ? {
+              ...todo,
+              tasks: todo.tasks.map((task) => ({
+                ...task,
+                checked: !isChecked,
+              })),
+            }
+          : todo
+      )
+    );
+
+    setIsMassChecked((prevState) => ({
+      ...prevState,
+      [todoId]: !isChecked,
+    }));
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar style="light" />
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <ScrollView style={styles.scrollView}>
-
           {/* Header */}
           <View style={styles.headerContainer}>
             <Text style={styles.headerTitle}>My Todo List</Text>
@@ -163,29 +186,53 @@ const Home: React.FC = () => {
           {todos.map((todo) => {
             const uncheckedTasks = todo.tasks.filter((task) => !task.checked);
             const checkedTasks = todo.tasks.filter((task) => task.checked);
+            const allTasksChecked = (tasks: Task[]) => tasks.every((task) => task.checked);
 
             return (
-              
               <View key={todo.id} style={styles.todoContainer}>
                 <Text style={styles.todoTitle}>{todo.title}</Text>
 
+                <TouchableOpacity
+                  style={styles.massChecker}
+                  onPress={() => handleMassCheck(todo.id)}
+                >
+                  <FontAwesome
+                    name={
+                      isMassChecked[todo.id] ? "check-square-o" : "square-o"
+                    }
+                    size={24}
+                    color="white"
+                  />
+                </TouchableOpacity>
+
                 {/* List of tasks */}
                 <ScrollView style={styles.listContainer}>
-                  {uncheckedTasks.map((task) => (
-                    <View key={task.id} style={styles.taskContainer}>
-                      <TouchableOpacity
-                        style={styles.checkbox}
-                        onPress={() => handleToggleTask(todo.id, task.id)}
-                      >
-                        <FontAwesome
-                          name={task.checked ? "check-square-o" : "square-o"}
-                          size={20}
-                          color="white"
-                        />
-                      </TouchableOpacity>
-                      <Text style={styles.taskText}>{task.text}</Text>
-                    </View>
-                  ))}
+                  {checkedTasks.length === todo.tasks.length &&
+                  todo.tasks.length > 0 ? (
+                    <Text style={styles.completedMessage}>
+                      Completed all tasks!
+                    </Text>
+                  ) : (
+                    <>
+                      {uncheckedTasks.map((task) => (
+                        <View key={task.id} style={styles.taskContainer}>
+                          <TouchableOpacity
+                            style={styles.checkbox}
+                            onPress={() => handleToggleTask(todo.id, task.id)}
+                          >
+                            <FontAwesome
+                              name={
+                                task.checked ? "check-square-o" : "square-o"
+                              }
+                              size={20}
+                              color="white"
+                            />
+                          </TouchableOpacity>
+                          <Text style={styles.taskText}>{task.text}</Text>
+                        </View>
+                      ))}
+                    </>
+                  )}
 
                   {/* Task Input */}
                   <View style={styles.taskInputContainer}>
@@ -220,7 +267,10 @@ const Home: React.FC = () => {
                     <>
                       <TouchableOpacity
                         onPress={toggleCheckedItems}
-                        style={styles.toggleButton}
+                        style={[
+                          styles.toggleButton,
+                          showCheckedItems && { backgroundColor: "#1da1f2" }, // Light blue background when showing completed items
+                        ]}
                       >
                         <Text style={styles.toggleButtonText}>
                           {showCheckedItems
@@ -371,8 +421,8 @@ const styles = StyleSheet.create({
     padding: 16,
   },
   headerContainer: {
-    paddingTop: 40,  
-    paddingBottom: 20, 
+    paddingTop: 40,
+    paddingBottom: 20,
     alignItems: "center",
   },
   headerText: {
@@ -435,7 +485,7 @@ const styles = StyleSheet.create({
     padding: 8,
     backgroundColor: "#333",
     borderRadius: 8,
-    width: '50%',
+    width: "50%",
   },
   toggleButtonText: {
     color: "white",
@@ -446,11 +496,11 @@ const styles = StyleSheet.create({
   },
   addTodoButton: {
     position: "absolute",
-    top: 48, 
-    right: 32, 
+    top: 48,
+    right: 32,
     backgroundColor: "white",
-    borderRadius: 50, 
-    width: 56, 
+    borderRadius: 50,
+    width: 56,
     height: 56,
     alignItems: "center",
     justifyContent: "center",
@@ -531,6 +581,18 @@ const styles = StyleSheet.create({
   },
   icon: {
     marginLeft: 8,
+  },
+  massChecker: {
+    position: "absolute",
+    top: 10,
+    right: 10,
+    padding: 10,
+  },
+  completedMessage: {
+    color: "#1da1f2",
+    fontSize: responsiveFontSize(12),
+    textAlign: "center",
+    marginTop: 10,
   },
 });
 

@@ -40,5 +40,3 @@ npm install -g expo-cli
 # Use this command to scan through Expo Go app
 npx expo start
 ```
-
-# nexTask
